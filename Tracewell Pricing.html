@@ -1,0 +1,462 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Tracewell Pricing</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: left-aligned header with the billing switch on the right, then three plan cards in a row that stacks to one column on phones. */
+:root {
+  --bg: #f1f3f8;
+  --surface: #ffffff;
+  --ink: #0e1626;
+  --muted: #566073;
+  --line: #dbe0ea;
+  --accent: #2447f5;
+  --accent-ink: #ffffff;
+  --accent-soft: #e6ebff;
+  --good: #0f7a4f;
+  --shadow: 0 1px 2px rgba(14, 22, 38, 0.06);
+  --shadow-lift: 0 18px 40px -16px rgba(14, 22, 38, 0.28);
+
+  --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b101a;
+    --surface: #121a29;
+    --ink: #e8ecf4;
+    --muted: #93a0b6;
+    --line: #26314a;
+    --accent: #8197ff;
+    --accent-ink: #0b101a;
+    --accent-soft: #1b2650;
+    --good: #4fd29a;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-lift: 0 18px 40px -16px rgba(0, 0, 0, 0.7);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b101a;
+  --surface: #121a29;
+  --ink: #e8ecf4;
+  --muted: #93a0b6;
+  --line: #26314a;
+  --accent: #8197ff;
+  --accent-ink: #0b101a;
+  --accent-soft: #1b2650;
+  --good: #4fd29a;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-lift: 0 18px 40px -16px rgba(0, 0, 0, 0.7);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  padding-block: 40px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1040px; margin-inline: auto; display: grid; gap: 36px; }
+
+/* Header */
+.head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 32px; }
+.head-copy { min-width: 0; max-width: 520px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(30px, 5vw, 44px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+  text-wrap: balance;
+}
+.lede { margin: 0; color: var(--muted); max-width: 52ch; }
+
+/* Billing switch */
+.switch {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 4px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  min-width: 260px;
+}
+.switch-thumb {
+  position: absolute;
+  top: 4px; bottom: 4px; left: 4px;
+  width: calc(50% - 4px);
+  background: var(--accent);
+  border-radius: 8px;
+  transition: transform 0.28s cubic-bezier(0.3, 0.8, 0.3, 1);
+}
+.switch[data-period="yearly"] .switch-thumb { transform: translateX(100%); }
+.switch button {
+  position: relative;
+  z-index: 1;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.switch button[aria-checked="true"] { color: var(--accent-ink); }
+.switch button:hover:not([aria-checked="true"]) { color: var(--ink); }
+.save-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  transition: background 0.2s, color 0.2s;
+}
+.switch button[aria-checked="true"] .save-tag { background: rgba(255, 255, 255, 0.22); color: var(--accent-ink); }
+:root[data-theme="dark"] .switch button[aria-checked="true"] .save-tag { background: rgba(11, 16, 26, 0.2); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .switch button[aria-checked="true"] .save-tag { background: rgba(11, 16, 26, 0.2); }
+}
+
+/* Cards */
+.plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
+.card {
+  --mx: 50%;
+  --my: 0%;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 26px;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  transition: transform 0.25s cubic-bezier(0.3, 0.8, 0.3, 1), box-shadow 0.25s, border-color 0.25s;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(260px circle at var(--mx) var(--my), color-mix(in srgb, var(--accent) 16%, transparent), transparent 65%);
+  opacity: 0;
+  transition: opacity 0.25s;
+  pointer-events: none;
+}
+.card:hover, .card:focus-within {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lift);
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+}
+.card:hover::before, .card:focus-within::before { opacity: 1; }
+.card.featured { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), var(--shadow); }
+.card.featured:hover, .card.featured:focus-within { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), var(--shadow-lift); }
+
+.card-top { display: grid; gap: 6px; }
+.plan-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.plan-name { font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: -0.01em; margin: 0; }
+.badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  white-space: nowrap;
+}
+.plan-for { margin: 0; color: var(--muted); font-size: 14px; }
+
+.price-block { display: grid; gap: 4px; }
+.price { display: flex; align-items: baseline; gap: 6px; }
+.price .cur { font-family: var(--font-display); font-size: 24px; font-weight: 500; color: var(--muted); align-self: flex-start; padding-top: 6px; }
+.price .amt {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.price .per { color: var(--muted); font-size: 14px; }
+.billed { margin: 0; font-size: 13px; color: var(--muted); min-height: 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.billed .off {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--good);
+  background: color-mix(in srgb, var(--good) 14%, transparent);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+.billed .off[hidden] { display: none !important; }
+
+.limits {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.limits div { padding: 10px 12px; min-width: 0; }
+.limits div + div { border-left: 1px solid var(--line); }
+.limits dt { font-size: 11px; color: var(--muted); margin: 0 0 2px; font-family: var(--font-mono); letter-spacing: 0.02em; }
+.limits dd { margin: 0; font-family: var(--font-mono); font-weight: 500; font-size: 15px; font-variant-numeric: tabular-nums; }
+
+.features { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; flex: 1; align-content: start; }
+.features li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 10px; align-items: start; }
+.features svg { width: 18px; height: 18px; margin-top: 2px; color: var(--accent); }
+.features .lead { color: var(--muted); font-size: 13px; }
+.features .lead svg { display: none; }
+.features .lead { display: block; }
+
+.cta {
+  appearance: none;
+  font: inherit;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;
+}
+.cta svg { width: 16px; height: 16px; transition: transform 0.2s; }
+.cta:hover { border-color: var(--accent); color: var(--accent); }
+.cta:hover svg { transform: translateX(4px); }
+.cta:active { transform: scale(0.98); }
+.featured .cta { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.featured .cta:hover { background: color-mix(in srgb, var(--accent) 86%, var(--ink)); color: var(--accent-ink); }
+
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; color: var(--muted); font-size: 13px; }
+.foot p { margin: 0; }
+.status { min-height: 20px; color: var(--ink); font-weight: 500; }
+
+@media (max-width: 900px) {
+  .plans { grid-template-columns: 1fr; max-width: 460px; margin-inline: auto; width: 100%; }
+  .head { align-items: flex-start; }
+  .switch { width: 100%; max-width: 460px; }
+}
+@media (min-width: 901px) {
+  .card.featured { transform: translateY(-8px); }
+  .card.featured:hover, .card.featured:focus-within { transform: translateY(-14px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, .switch-thumb { transition: none !important; animation: none !important; }
+  .card:hover, .card:focus-within, .card.featured:hover { transform: none; }
+}
+</style>
+
+<div class="wrap">
+  <header class="head">
+    <div class="head-copy">
+      <p class="eyebrow">Tracewell plans</p>
+      <h1>Pay for the events you ship, nothing else.</h1>
+      <p class="lede">Every plan includes search, live tail, and alerts. Limits count ingested events per month and reset on your billing date.</p>
+    </div>
+    <div class="switch" id="switch" role="radiogroup" aria-label="Billing period" data-period="yearly">
+      <span class="switch-thumb" aria-hidden="true"></span>
+      <button type="button" role="radio" id="opt-monthly" aria-checked="false" tabindex="-1">Monthly</button>
+      <button type="button" role="radio" id="opt-yearly" aria-checked="true" tabindex="0">Yearly <span class="save-tag">2 mo free</span></button>
+    </div>
+  </header>
+
+  <section class="plans" aria-label="Plans">
+    <article class="card" data-plan="Starter" data-monthly="24" data-yearly="20">
+      <div class="card-top">
+        <div class="plan-row"><h2 class="plan-name">Starter</h2></div>
+        <p class="plan-for">For one service and a small on-call rotation.</p>
+      </div>
+      <div class="price-block">
+        <div class="price"><span class="cur">$</span><span class="amt">20</span><span class="per">/ month</span></div>
+        <p class="billed"><span class="billed-text">Billed $240 per year</span></p>
+      </div>
+      <dl class="limits">
+        <div><dt>Events</dt><dd>5M</dd></div>
+        <div><dt>Retention</dt><dd>7 d</dd></div>
+        <div><dt>Seats</dt><dd>3</dd></div>
+      </dl>
+      <ul class="features">
+        <li class="lead">Includes:</li>
+        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>1 project</li>
+        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Live tail and saved searches</li>
+        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Email and Slack alerts</li>
+        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Community support</li>
+      </ul>
+      <button type="button" class="cta">Start with Starter <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg></button>
+    </article>
+
+    <article class="card featured" data-plan="Team" data-monthly="72" data-yearly="60">
+      <div class="card-top">
+        <div class="plan-row"><h2 class="plan-name">Team</h2><span class="badge">Most chosen</span></div>
+        <p class="plan-for">For product teams running several services in production.</p>
+      </div>
+      <div class="price-block">
+        <div class="price"><span class="cur">$</span><span class="amt">60</span><span class="per">/ month</span></div>
+        <p class="billed"><span class="billed-text">Billed $720 per year</span></p>
+      </div>
+      <dl class="limits">
+        <div><dt>Events</dt><dd>50M</dd></div>
+        <div><dt>Retention</dt><dd>30 d</dd></div>
+        <div><dt>Seats</dt><dd>15</dd></div>
+      </dl>
+      <ul class="features">
+        <li class="lead">Everything in Starter, plus:</li>
+        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Unlimited projects</li>
+        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>PagerDuty and Opsgenie routing</li>
+        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Sampling rules and field redaction</li>
+        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Email support, 1 business day</li>
+      </ul>
+      <button type="button" class="cta">Start with Team <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg></button>
+    </article>
+
+    <article class="card" data-plan="Scale" data-monthly="240" data-yearly="200">
+      <div class="card-top">
+        <div class="plan-row"><h2 class="plan-name">Scale</h2></div>
+        <p class="plan-for">For platform teams with compliance and uptime targets.</p>
+      </div>
+      <div class="price-block">
+        <div class="price"><span class="cur">$</span><span class="amt">200</span><span class="per">/ month</span></div>
+        <p class="billed"><span class="billed-text">Billed $2,400 per year</span></p>
+      </div>
+      <dl class="limits">
+        <div><dt>Events</dt><dd>500M</dd></div>
+        <div><dt>Retention</dt><dd>90 d</dd></div>
+        <div><dt>Seats</dt><dd>Unltd</dd></div>
+      </dl>
+      <ul class="features">
+        <li class="lead">Everything in Team, plus:</li>
+        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>SAML SSO and SCIM</li>
+        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Audit log, exportable to S3</li>
+        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>99.95% uptime SLA</li>
+        <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-9"/></svg>Shared Slack channel, 1 hour response</li>
+      </ul>
+      <button type="button" class="cta">Start with Scale <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg></button>
+    </article>
+  </section>
+
+  <footer class="foot">
+    <p>Prices in USD per workspace. Events above your limit are billed at $0.40 per additional million.</p>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var sw = document.getElementById("switch");
+  var optM = document.getElementById("opt-monthly");
+  var optY = document.getElementById("opt-yearly");
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".card"));
+  var statusEl = document.getElementById("status");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var period = "yearly";
+
+  function fmt(n) { return n.toLocaleString("en-US"); }
+
+  function tween(el, from, to) {
+    if (el._raf) cancelAnimationFrame(el._raf);
+    if (reduce || from === to) { el.textContent = fmt(to); return; }
+    var start = null, dur = 380;
+    function step(ts) {
+      if (start === null) start = ts;
+      var t = Math.min(1, (ts - start) / dur);
+      var e = 1 - Math.pow(1 - t, 3);
+      el.textContent = fmt(Math.round(from + (to - from) * e));
+      if (t < 1) el._raf = requestAnimationFrame(step);
+    }
+    el._raf = requestAnimationFrame(step);
+  }
+
+  function render(animate) {
+    var yearly = period === "yearly";
+    sw.setAttribute("data-period", period);
+    optM.setAttribute("aria-checked", String(!yearly));
+    optY.setAttribute("aria-checked", String(yearly));
+    optM.tabIndex = yearly ? -1 : 0;
+    optY.tabIndex = yearly ? 0 : -1;
+    cards.forEach(function (card) {
+      var m = +card.dataset.monthly, y = +card.dataset.yearly;
+      var amt = card.querySelector(".amt");
+      var target = yearly ? y : m;
+      var current = parseInt(amt.textContent.replace(/,/g, ""), 10) || target;
+      if (animate) tween(amt, current, target); else amt.textContent = fmt(target);
+      var billed = card.querySelector(".billed-text");
+      billed.textContent = yearly ? "Billed $" + fmt(y * 12) + " per year" : "Billed monthly, cancel any time";
+      var off = card.querySelector(".off");
+      if (yearly && !off) {
+        off = document.createElement("span");
+        off.className = "off";
+        off.textContent = "Save $" + fmt((m - y) * 12);
+        card.querySelector(".billed").appendChild(off);
+      } else if (!yearly && off) {
+        off.remove();
+      } else if (yearly && off) {
+        off.textContent = "Save $" + fmt((m - y) * 12);
+      }
+    });
+  }
+
+  function setPeriod(p, focus) {
+    if (p === period) return;
+    period = p;
+    render(true);
+    if (focus) (p === "yearly" ? optY : optM).focus();
+    statusEl.textContent = "";
+  }
+
+  optM.addEventListener("click", function () { setPeriod("monthly"); });
+  optY.addEventListener("click", function () { setPeriod("yearly"); });
+  sw.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); setPeriod("monthly", true); }
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); setPeriod("yearly", true); }
+  });
+
+  cards.forEach(function (card) {
+    card.addEventListener("pointermove", function (e) {
+      var r = card.getBoundingClientRect();
+      card.style.setProperty("--mx", (e.clientX - r.left) + "px");
+      card.style.setProperty("--my", (e.clientY - r.top) + "px");
+    });
+    card.querySelector(".cta").addEventListener("click", function () {
+      var yearly = period === "yearly";
+      var price = +card.dataset[yearly ? "yearly" : "monthly"];
+      statusEl.textContent = card.dataset.plan + " selected: $" + fmt(price) + " per month, billed " + (yearly ? "yearly" : "monthly") + ".";
+    });
+  });
+
+  render(false);
+})();
+</script>
+
+</body></html>
